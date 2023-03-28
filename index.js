@@ -71,9 +71,9 @@ const VALUE_PARSERS = {
   134: "mapParser",
   135: new Parser().int8("value"), // boolean
 }
-const VALUEARRAY_PARSERS = (lengthVariable) => Object.fromEntries(
+const VALUEARRAY_PARSERS = (lengthVariable, targetVariable) => Object.fromEntries(
   Object.entries(VALUE_PARSERS).map(
-    ([k, parser]) => [k, new Parser().array("values", { length: lengthVariable, type: parser })]
+    ([k, parser]) => [k, new Parser().array(targetVariable, { length: lengthVariable, type: parser })]
   )
 )
 const UNKNOWN_VAL_PARSER = (type_loc) => {
@@ -121,7 +121,7 @@ ADD_FORMATTER(new Parser()
   valueParser
 )
 
-containerParser
+ADD_FORMATTER(new Parser()
   .uint8("type")
   .uint32le("containerSize")
   .saveOffset("containerStartOffset")
@@ -129,7 +129,7 @@ containerParser
   .uint32le("containerLength")
   .choice("", {
     tag: "type",
-    choices: VALUEARRAY_PARSERS("containerLength"),
+    choices: VALUEARRAY_PARSERS("containerLength", "values"),
     defaultChoice: UNKNOWN_VAL_PARSER(-9),
   })
 
@@ -141,7 +141,10 @@ containerParser
       console.log('B Skipping', this.containerStartOffset + this.containerSize - this.containerEndOffset, 'bytes after type', this.type)
     }
     return skip;
-  })
+  }),
+  x => x.values,
+  containerParser
+)
 
 
 structParser
