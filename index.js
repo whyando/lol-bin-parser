@@ -147,7 +147,7 @@ ADD_FORMATTER(new Parser()
 )
 
 
-structParser
+ADD_FORMATTER(new Parser()
   .uint32le("classHash")
   .uint32le("structSize")
   .saveOffset("structStartOffset")
@@ -170,7 +170,10 @@ structParser
       console.log('STRUCT Skipped', skip, 'bytes')
     }
     return skip;
-  })
+  }),
+  x => ({ classHash: x.classHash, properties: x.properties }),
+  structParser,
+)
 
 mapParser
   .uint8("keyType")
@@ -206,29 +209,32 @@ mapParser
   })
 
 
-const objectParser = Parser.start()
-  .uint32le("objectSize")
-  .saveOffset("objectStartOffset")
+const objectParser = ADD_FORMATTER(
+  Parser.start()
+    .uint32le("objectSize")
+    .saveOffset("objectStartOffset")
 
-  .uint32le("pathHash")
-  .uint16le("valueCount")
-  .array("values", {
-    length: "valueCount",
-    type: new Parser()
-      .uint32le("nameHash")
-      .nest("value", {
-        type: "valueParser"
-      })
-  })
-  .saveOffset("objectFinishOffset")
-  .seek(function() {
-    const skip = this.objectStartOffset + this.objectSize - this.objectFinishOffset
-    if (skip != 0) {
-      console.log(this.objectStartOffset, this.objectSize, this.objectFinishOffset, skip)
-      console.log('C Skipping', skip, 'bytes')
-    }
-    return skip;
-  })
+    .uint32le("pathHash")
+    .uint16le("valueCount")
+    .array("values", {
+      length: "valueCount",
+      type: new Parser()
+        .uint32le("nameHash")
+        .nest("value", {
+          type: "valueParser"
+        })
+    })
+    .saveOffset("objectFinishOffset")
+    .seek(function() {
+      const skip = this.objectStartOffset + this.objectSize - this.objectFinishOffset
+      if (skip != 0) {
+        console.log(this.objectStartOffset, this.objectSize, this.objectFinishOffset, skip)
+        console.log('C Skipping', skip, 'bytes')
+      }
+      return skip;
+    }),
+  x => x
+)
 
 const objectArrayParser = new Parser()
   .uint32le("objectCount")
