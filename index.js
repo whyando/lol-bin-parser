@@ -2,22 +2,29 @@ import { Parser } from "binary-parser";
 import fs from 'fs'
 import util from 'util'
 
+const ADD_FORMATTER = (parser, formatter, root=new Parser()) => {
+  return root
+    .nest("", {
+      type: parser,
+      formatter,
+    })
+}
+
 const colourParser = new Parser()
   .uint8("r")
   .uint8("g")
   .uint8("b")
   .uint8("a")
 
-const stringParser = new Parser()
-  .nest("", {
-    type: new Parser()
-      .int16le("valueLen")
-      .string("value", {
-        length: "valueLen",
-        encoding: "utf8",
-      }),
-    formatter: (x) => x.value
-  })
+const stringParser = ADD_FORMATTER(
+  new Parser()
+    .int16le("valueLen")
+    .string("value", {
+      length: "valueLen",
+      encoding: "utf8",
+    }),
+  x => x.value
+)
 
 const dependencyArrayParser = new Parser()
   .uint32le("dependenciesCount")
@@ -27,7 +34,7 @@ const dependencyArrayParser = new Parser()
   })
 
 // register parsers in advance to allow recursive parsing
-const valueParser = Parser.start().namely("valueParser");
+let valueParser = Parser.start().namely("valueParser");
 const structParser = Parser.start().namely("structParser");
 const containerParser = Parser.start().namely("containerParser");
 const optionParser = Parser.start().namely("optionParser");
@@ -38,20 +45,20 @@ const objectLinkParser = new Parser().namely("objectLinkParser")
 
 const VALUE_PARSERS = {
   0: new Parser(),
-  1: new Parser().int8("value"), // boolean
-  2: new Parser().int8("value"),
-  3: new Parser().uint8("value"),
-  4: new Parser().int16le("value"),
-  5: new Parser().uint16le("value"),
-  6: new Parser().int32le("value"),
-  7: new Parser().uint32le("value"),
-  8: new Parser().int64le("value"),
-  9: new Parser().uint64le("value"),
-  10: new Parser().floatle("value"), // f32
-  11: new Parser().array("value", { length: 2, type: new Parser().floatle() }),
-  12: new Parser().array("value", { length: 3, type: new Parser().floatle() }),
-  13: new Parser().array("value", { length: 4, type: new Parser().floatle() }),
-  14: new Parser().array("value", { length: 16, type: new Parser().floatle() }),
+  1: new Parser().int8(""), // boolean
+  2: new Parser().int8(""),
+  3: new Parser().uint8(""),
+  4: new Parser().int16le(""),
+  5: new Parser().uint16le(""),
+  6: new Parser().int32le(""),
+  7: new Parser().uint32le(""),
+  8: new Parser().int64le(""),
+  9: new Parser().uint64le(""),
+  10: new Parser().floatle(""), // f32
+  11: new Parser().array("", { length: 2, type: new Parser().floatle() }),
+  12: new Parser().array("", { length: 3, type: new Parser().floatle() }),
+  13: new Parser().array("", { length: 4, type: new Parser().floatle() }),
+  14: new Parser().array("", { length: 16, type: new Parser().floatle() }),
   15: colourParser,
   16: stringParser,
   17: new Parser().uint32le("hash"),
@@ -103,13 +110,16 @@ optionParser
     },
   })
 
-valueParser  
+ADD_FORMATTER(new Parser()
   .uint8("type")
-  .choice("values", {
+  .choice("value", {
     tag: "type",
     choices: VALUE_PARSERS,
     defaultChoice: UNKNOWN_VAL_PARSER(-1),
-  })
+  }),
+  x => x.value,
+  valueParser
+)
 
 containerParser
   .uint8("type")
