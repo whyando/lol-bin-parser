@@ -2,6 +2,10 @@ import { Parser } from "binary-parser";
 import fs from 'fs'
 import util from 'util'
 
+function hex(hash) {
+  return `[0x${hash.toString(16)}]`
+}
+
 const ADD_FORMATTER = (parser, formatter, root=new Parser()) => {
   return root
     .nest("", {
@@ -171,7 +175,10 @@ ADD_FORMATTER(new Parser()
     }
     return skip;
   }),
-  x => ({ classHash: x.classHash, properties: x.properties }),
+  x => ({
+    classHash: hex(x.classHash),
+    properties: Object.fromEntries(x.properties.map(y => [hex(y.nameHash), y.value]))
+  }),
   structParser,
 )
 
@@ -233,7 +240,7 @@ const objectParser = ADD_FORMATTER(
       }
       return skip;
     }),
-  x => x
+  x => Object.fromEntries(x.values.map(y => [hex(y.nameHash), y.value]))
 )
 
 const objectArrayParser = new Parser()
