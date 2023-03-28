@@ -9,10 +9,14 @@ const colourParser = new Parser()
   .uint8("a")
 
 const stringParser = new Parser()
-  .int16le("valueLen")
-  .string("value", {
-    length: "valueLen",
-    encoding: "utf8",
+  .nest("", {
+    type: new Parser()
+      .int16le("valueLen")
+      .string("value", {
+        length: "valueLen",
+        encoding: "utf8",
+      }),
+    formatter: (x) => x.value
   })
 
 const dependencyArrayParser = new Parser()
