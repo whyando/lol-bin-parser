@@ -19,12 +19,7 @@ const dependencyArrayParser = new Parser()
   .uint32le("dependenciesCount")
   .array("dependencies", {
     length: "dependenciesCount",
-    type: new Parser()
-      .int16le("nameLen")
-      .string("name", {
-        length: "nameLen",
-        encoding: "utf8",
-      }),
+    type: stringParser,
   })
 
 // register parsers in advance to allow recursive parsing
