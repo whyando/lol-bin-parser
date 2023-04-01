@@ -1,0 +1,66 @@
+<Buffer 33 22 11 00 04 00 01 00 04 00 00 00 53 6b 69 6e 31 36 5f 4d 41 54 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ... 409026 more bytes>
+{
+  magic: 1122867,
+  major: 4,
+  minor: 1,
+  rangeCount: 4,
+  ranges: [
+    {
+      material: 'Skin16_MAT',
+      startVertex: 0,
+      vertexCount: 4487,
+      startIndex: 0,
+      indexCount: 22566
+    },
+    {
+      material: 'Skin16_Visor_MAT',
+      startVertex: 4487,
+      vertexCount: 42,
+      startIndex: 22566,
+      indexCount: 186
+    },
+    {
+      material: 'blades',
+      startVertex: 4529,
+      vertexCount: 1261,
+      startIndex: 22752,
+      indexCount: 7488
+    },
+    {
+      material: 'Skin16_Recall_MAT',
+      startVertex: 5790,
+      vertexCount: 789,
+      startIndex: 30240,
+      indexCount: 3042
+    }
+  ],
+  flags: 0,
+  indexCount: 33282,
+  vertexCount: 6579,
+  vertexSize: 52,
+  vertexType: 0,
+  boundingBox: [
+    -95.04571533203125,
+    -16.490819931030273,
+    -132.83338928222656,
+    95.04571533203125,
+    219.97789001464844,
+    16.31220054626465
+  ],
+  boundingSphere: [
+    -0.13317327201366425,
+    114.292236328125,
+    -20.06059455871582,
+    138.98800659179688
+  ],
+  bytesRead: 392,
+  indexBuffer: <Buffer 2a 02 2b 02 15 02 1f 02 2b 02 2a 02 11 02 1f 02 2a 02 29 02 1f 02 11 02 29 02 11 02 13 02 13 02 11 02 28 02 13 02 28 02 0b 02 0b 02 28 02 12 02 14 02 ... 66514 more bytes>,
+  vertexBuffer: <Buffer 0c a0 96 40 5a a3 21 43 4a b0 4e c1 01 00 1f 00 cb 4d 22 3f 18 f9 ae 3e 15 b5 c6 3c 00 00 00 00 dd 03 3c 3e 97 94 25 bf ac 7f 3d bf 12 50 61 3e 74 94 ... 342058 more bytes>,
+  remainingBytes: [
+    0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0,
+    0, 0
+  ]
+}
+392 bytes parsed of 409076
+409064
