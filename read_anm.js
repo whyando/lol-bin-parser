@@ -2,7 +2,7 @@ import { Parser } from "binary-parser";
 import fs from 'fs'
 import util from 'util'
 
-const skeleton = new Parser()
+const animationParser = new Parser()
     .useContextVars()
     .string("magic", {
         length: 8, assert: 'r3d2anmd',
@@ -58,6 +58,6 @@ const skeleton = new Parser()
 
 const buf = await fs.promises.readFile('./data/irelia_idle_01.anm', null)
 console.log(buf)
-const parsed = skeleton.parse(buf)
+const parsed = animationParser.parse(buf)
 
 console.log(util.inspect(parsed, false, null, false))
