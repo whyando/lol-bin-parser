@@ -29,7 +29,10 @@ const animationParser = new Parser()
         return (12 + this.vectorPaletteOffset) - this.bytesRead;
     })
     .buffer("vectorPaletteBuffer", {
-        length: function() { return this.quatPaletteOffset - this.vectorPaletteOffset; }
+        length: function() {
+            this.numVectorPalette = (this.quatPaletteOffset - this.vectorPaletteOffset) / 12;
+            return this.quatPaletteOffset - this.vectorPaletteOffset;
+        }
     })
 
     .saveOffset("bytesRead")
@@ -37,7 +40,10 @@ const animationParser = new Parser()
         return (12 + this.quatPaletteOffset) - this.bytesRead;
     })
     .buffer("quatPaletteBuffer", {
-        length: function() { return this.jointNameHashesOffset - this.quatPaletteOffset; }
+        length: function() {
+            this.numQuadPalette = (this.jointNameHashesOffset - this.quatPaletteOffset) / 6;
+            return this.jointNameHashesOffset - this.quatPaletteOffset;
+        }
     })
 
     .saveOffset("bytesRead")
@@ -45,7 +51,10 @@ const animationParser = new Parser()
         return (12 + this.jointNameHashesOffset) - this.bytesRead;
     })
     .buffer("jointNameHashesBuffer", {
-        length: function() { return this.framesOffset - this.jointNameHashesOffset; }
+        length: function() {
+            this.numJointNameHashes = (this.framesOffset - this.jointNameHashesOffset) / 4;
+            return this.framesOffset - this.jointNameHashesOffset;
+        }
     })
 
     .saveOffset("bytesRead")
@@ -53,10 +62,16 @@ const animationParser = new Parser()
         return (12 + this.framesOffset) - this.bytesRead;
     })
     .buffer("framesBuffer", {
-        length: function() { return 2 * this.frameCount * this.trackCount; }
+        length: function() { return 6 * this.frameCount * this.trackCount; }
     })
 
-const buf = await fs.promises.readFile('./data/irelia_idle_01.anm', null)
+    .saveOffset("bytesRead")
+    .array("remainingBytes", {
+        type: 'uint8',
+        readUntil: 'eof',
+    })
+
+const buf = await fs.promises.readFile('./data/petchibiashe_base_idle.chibi_ashe_base.anm', null)
 console.log(buf)
 const parsed = animationParser.parse(buf)
 

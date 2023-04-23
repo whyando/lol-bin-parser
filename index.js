@@ -176,8 +176,8 @@ ADD_FORMATTER(new Parser()
     return skip;
   }),
   x => ({
-    classHash: hex(x.classHash),
-    properties: Object.fromEntries(x.properties.map(y => [hex(y.nameHash), y.value]))
+    "_classHash": hex(x.classHash),
+    ...Object.fromEntries(x.properties.map(y => [hex(y.nameHash), y.value]))
   }),
   structParser,
 )
@@ -267,7 +267,7 @@ const p = new Parser()
   })
 
 
-const buf = await fs.promises.readFile('./data/skin16.bin', null)
+const buf = await fs.promises.readFile('./data/ashe skin skin1.bin', null)
 
 console.log(util.inspect(p.parse(buf), false, null, false))
 

@@ -14,9 +14,13 @@
   vectorPaletteOffset: 64,
   quatPaletteOffset: 72916,
   framesOffset: 132580,
-  bytesRead: 132592,
+  bytesRead: 244912,
+  numVectorPalette: 6071,
   vectorPaletteBuffer: <Buffer 00 00 80 3f 00 00 80 3f 00 00 80 3f 0e be 80 3f 00 00 80 3f 00 00 80 3f 72 8a 7e 3f 72 f9 7f 3f 00 00 80 3f 52 96 81 3f 00 00 80 3f 00 00 80 3f 52 49 ... 72802 more bytes>,
+  numQuadPalette: 9840,
   quatPaletteBuffer: <Buffer cf b4 df 9d 4f 31 fd 3e 9f e2 cd 6f 51 37 92 e3 20 71 57 40 91 5a 14 70 66 c9 04 a0 c9 73 7e d4 18 fd 86 74 1a c0 fc e1 8c 71 ca 42 9e dd 62 6c 62 c8 ... 58990 more bytes>,
+  numJointNameHashes: 156,
   jointNameHashesBuffer: <Buffer 64 96 07 00 81 04 a7 07 82 04 a7 07 9b 4b 07 00 74 eb 06 00 e4 fc 86 00 e4 ec 2f 00 31 80 5e 09 32 80 5e 09 33 80 5e 09 34 80 5e 09 e4 ec 14 00 21 80 ... 574 more bytes>,
-  framesBuffer: <Buffer 10 01 00 00 00 00 11 01 00 00 01 00 12 01 00 00 02 00 13 01 00 00 03 00 14 01 00 00 04 00 15 01 00 00 05 00 16 01 00 00 06 00 17 01 00 00 07 00 18 01 ... 37390 more bytes>
+  framesBuffer: <Buffer 10 01 00 00 00 00 11 01 00 00 01 00 12 01 00 00 02 00 13 01 00 00 03 00 14 01 00 00 04 00 15 01 00 00 05 00 16 01 00 00 06 00 17 01 00 00 07 00 18 01 ... 112270 more bytes>,
+  remainingBytes: []
 }
