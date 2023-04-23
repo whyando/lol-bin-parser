@@ -1,0 +1,30 @@
+{
+  magic: 'PROP',
+  version: 3,
+  dependenciesCount: 2,
+  dependencies: [
+    'DATA/Characters/PetChibiAshe/Animations/Base.bin',
+    'DATA/Characters/PetChibiAshe/PetChibiAshe.bin'
+  ],
+  objectCount: 2,
+  objectClassHashes: [ 2607278582, 4013559603 ],
+  objects: [
+    {
+      '[0x2d78c328]': 'PetChibiAshe',
+      '[0x426d89a3]': {
+        classHash: '[0x426d89a3]',
+        properties: { '[0xf5fb07c7]': { link: 3573338979 } }
+      },
+      '[0x45ff5904]': {
+        classHash: '[0x6111d8a4]',
+        properties: { '[0x252f6884]': 0.8999999761581421, '[0xb933a389]': 0 }
+      },
+      '[0x51c83af8]': {
+        classHash: '[0x11b71b5e]',
+        properties: { '[0x3fcb5693]': 16, '[0x9c5124c0]': 0 }
+      },
+      '[0x62286e7e]': { link: 2741891687 }
+    },
+    {}
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  magic: 'PROP',
+  version: 3,
+  dependenciesCount: 0,
+  dependencies: [],
+  objectCount: 2,
+  objectClassHashes: [ 4160558231, 602544405 ],
+  objects: [
+    {},
+    {
+      '[0xff675dd4]': 'PetChibiAshe',
+      '[0xf4729554]': { classHash: '[0xf4729554]', properties: { '[0x9c677a2c]': 0 } },
+      '[0xa02a904b]': 70,
+      '[0x785214a0]': 350,
+      '[0xb8f0a725]': {
+        classHash: '[0x6ad3499]',
+        properties: {
+          '[0xf8f757cc]': { type: 10, isSome: 1, value: 0.07199999690055847 }
+        }
+      },
+      '[0x82135982]': { type: 10, isSome: 1, value: 0 },
+      '[0x618581ea]': 'companion_description_chibiashe_base',
+      '[0x8d39bde6]': 'companion_species_name_chibiashe',
+      '[0x91bf871f]': 50,
+      '[0x7ef17055]': { type: 10, isSome: 1, value: 80 },
+      '[0xec3d693a]': {
+        classHash: '[0xec3d693a]',
+        properties: {
+          '[0x7066e6ca]': {
+            keyType: 7,
+            valueType: 131,
+            mapSize: 46,
+            mapStartOffset: 270,
+            mapLength: 3,
+            values: [
+              {
+                key: 0,
+                value: { classHash: '[0xd01d25c0]', properties: {} }
+              },
+              {
+                key: 1,
+                value: { classHash: '[0xd01d25c0]', properties: {} }
+              },
+              {
+                key: 2,
+                value: { classHash: '[0xd01d25c0]', properties: {} }
+              }
+            ],
+            mapEndOffset: 316
+          },
+          '[0x346f3b69]': 'companion_description_chibiashe_base',
+          '[0xb0dbb527]': 1,
+          '[0x8c308ee2]': 50,
+          '[0x7a209a48]': 1.5
+        }
+      },
+      '[0xec6dac89]': 1,
+      '[0x9c677a2c]': 8398280
+    }
+  ]
+}
